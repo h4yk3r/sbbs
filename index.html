@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>sbbs test</title>
+    <!-- Include web3.js here -->
+    <script language="javascript" type="text/javascript" src="web3.min.js"></script>
+  </head>
+  <body>
+
+    <script>
+
+        var sbbs;
+        var web3js = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:9545"));
+        var abi = [
+            {
+            "inputs": [
+                {
+                "internalType": "string",
+                "name": "postData",
+                "type": "string"
+                }
+            ],
+            "stateMutability": "nonpayable",
+            "type": "constructor"
+            },
+            {
+            "anonymous": false,
+            "inputs": [
+                {
+                "indexed": true,
+                "internalType": "address",
+                "name": "author",
+                "type": "address"
+                },
+                {
+                "indexed": true,
+                "internalType": "address",
+                "name": "replyToAddress",
+                "type": "address"
+                },
+                {
+                "indexed": true,
+                "internalType": "uint256",
+                "name": "postID",
+                "type": "uint256"
+                },
+                {
+                "indexed": false,
+                "internalType": "string",
+                "name": "postData",
+                "type": "string"
+                }
+            ],
+            "name": "posted",
+            "type": "event"
+            },
+            {
+            "inputs": [],
+            "name": "getPostCount",
+            "outputs": [
+                {
+                "internalType": "uint256",
+                "name": "count",
+                "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function",
+            "constant": true
+            },
+            {
+            "inputs": [
+                {
+                "internalType": "uint256",
+                "name": "postID",
+                "type": "uint256"
+                }
+            ],
+            "name": "getPost",
+            "outputs": [
+                {
+                "internalType": "address",
+                "name": "author",
+                "type": "address"
+                },
+                {
+                "internalType": "uint256",
+                "name": "replyTo",
+                "type": "uint256"
+                },
+                {
+                "internalType": "uint256",
+                "name": "time",
+                "type": "uint256"
+                },
+                {
+                "internalType": "string",
+                "name": "postData",
+                "type": "string"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function",
+            "constant": true
+            },
+            {
+            "inputs": [
+                {
+                "internalType": "uint256",
+                "name": "replyTo",
+                "type": "uint256"
+                },
+                {
+                "internalType": "string",
+                "name": "postData",
+                "type": "string"
+                }
+            ],
+            "name": "createPost",
+            "outputs": [
+                {
+                "internalType": "uint256",
+                "name": "postID",
+                "type": "uint256"
+                }
+            ],
+            "stateMutability": "nonpayable",
+            "type": "function"
+            }
+        ];
+
+        var addr = "0xba11768D4a822a1648DDE372A6D5738311dC02a3";
+
+        sbbs = new web3js.eth.Contract(abi, addr);
+
+        function getPostCount() {
+            return sbbs.methods.getPostCount().call()
+        }
+
+    </script>
+
+    <button type="button" onclick="getPostCount()">getCount</button>
+
+  </body>
+</html>

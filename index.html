@@ -135,7 +135,8 @@
         sbbs = new web3js.eth.Contract(abi, addr);
 
         function getPostCount() {
-            return sbbs.methods.getPostCount().call()
+            sbbs.methods.getPostCount().call()
+            .then(console.log);
         }
 
     </script>

@@ -139,9 +139,26 @@
             .then(console.log);
         }
 
+        function getPost() {
+            // var id = document.getElementById('postid');
+            sbbs.methods.getPost(1).call()
+            .then(console.log);
+        }
+
+        function createPost() {
+            var replyTo = 0;
+            var postData = "hello";
+            sbbs.methods.createPost(replyTo, postData).send({from:'0xf31D0681d065809a6B9CdF9eABd8Db7a10a14CaA'})
+            .on("receipt", console.log);
+        }
+
     </script>
 
-    <button type="button" onclick="getPostCount()">getCount</button>
+    <button type="button" onclick="getPostCount()">getCount</button><br>
+
+    <button type="button" onclick="getPost()">getPost</button><br>
+
+    <button type="button" onclick="createPost()">createPost</button><br>
 
   </body>
 </html>

@@ -5,19 +5,16 @@ pragma solidity >=0.7.0 <0.9.0;
 import "./Sbbsi.sol";
 
 contract Sbbs is Sbbsi {
-    uint nextPostID;
-
     struct Post {
         address author;
-
         uint replyTo;
-
         uint time;
 
         string postData;
     }
-
     mapping(uint=>Post) private posts;
+
+    uint nextPostID;
 
     constructor(string memory postData) {
 
